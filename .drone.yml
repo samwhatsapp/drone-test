@@ -1,0 +1,23 @@
+kind: pipeline
+type: docker
+name: default
+
+platform:
+  os: linux
+  arch: arm64
+
+steps:
+- name: compile
+  image: gcc:9.3.0
+  commands:
+  - gcc -c main.c -o main.o
+
+- name: link
+  image: gcc:9.3.0
+  commands:
+  - gcc -o main main.o
+
+- name: test
+  image: gcc:9.3.0
+  commands:
+  - ./main
